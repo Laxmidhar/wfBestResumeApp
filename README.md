@@ -1,27 +1,43 @@
-# WfBestResumeApp
+#Create new Repository
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Laxmidhar/wfBestResumeApp.git
+git push -u origin main
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
+#Create Angular application : Angular CLI to create a new project
+---------------------------------------------------
+npm install -g @angular/cli
+npm install -g typescript
+ng new wfBestResumeApp --standalone false
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#### Deploy to Azure App Service using cli ###
 
-## Code scaffolding
+##Download the sample app
+mkdir htmlapp
+cd htmlapp
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+git clone https://github.com/Laxmidhar/wfBestResumeApp.git
+resourceGroup=$(az group list --query "[].{id:name}" -o tsv)
+appName=wfBestResumeApp$RANDOM
 
-## Build
+#Create the web app and deploy
+cd wfBestResumeApp
+az webapp up --sku F1 -g $resourceGroup -n $appName
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+{
+  "URL": "http://wfbestresumeapp18482.azurewebsites.net",
+  "appserviceplan": "sahoo19laxmidhar_asp_8687",
+  "location": "eastus",
+  "name": "wfBestResumeApp18482",
+  "os": "Linux",
+  "resourcegroup": "learn-77132478-1db1-4f04-a4ab-1014efbba47a",
+  "runtime_version": "node|16-LTS",
+  "runtime_version_detected": "0.0",
+  "sku": "FREE",
+  "src_path": "//home//sahoo19laxmidhar//nodeapp//wfBestResumeApp"
+}
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#Add angular capability
