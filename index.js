@@ -9,14 +9,14 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(root, 'dist/browser/')));
+app.use(express.static(path.join(root, 'public/browser/')));
 app.use('/api', routes);
 app.use((req, res, next) => {
   next();
 });
 app.get('*', (req, res) => {
   console.log('Requested URL:', req.url);
-  res.sendFile(path.join(__dirname, 'dist/browser/index.html'));
+  res.sendFile(path.join(__dirname, 'public/browser/index.html'));
 });
 
 app.listen(port, () => console.log(`API running on localhost :${port}`));
